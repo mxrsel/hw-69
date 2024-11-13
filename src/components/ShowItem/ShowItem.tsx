@@ -1,20 +1,34 @@
-import React from 'react';
-import {IShow} from "../../types.ts";
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {fetchDetails} from "../../store/thunks/showThunk.ts";
+import {AppDispatch, RootState} from "../../app/store.ts";
+import Spinner from "../Spinner/Spinner.tsx";
 
-interface IShowItemProps {
-    show: IShow
-}
+const ShowItem: React.FC = () => {
+    const { showId } = useParams();
+    const dispatch = useDispatch<AppDispatch>();
+    const { Details, isLoading } = useSelector((state: RootState) => state.show);
 
-const ShowItem : React.FC<IShowItemProps>= ({show}) => {
+    useEffect(() => {
+        if (showId) {
+            dispatch(fetchDetails(Number(showId)));
+        }
+    }, [dispatch, showId]);
+
     return (
-        <div key={show.id}>
-            <img
-                src={show.image}
-                alt={show.name}
-            />
-            <h1>{show.name}</h1>
-            <p>{show.summary}</p>
-        </div>
+        <>
+        {isLoading ? <Spinner/> : (
+            Details && (
+                <div>
+                    <h1>{Details.name}</h1>
+                    <img src={Details.image} alt={Details.name}/>
+                    <div>{Details.summary} </div>
+                </div>
+            )
+            )
+        }
+        </>
     );
 };
 
