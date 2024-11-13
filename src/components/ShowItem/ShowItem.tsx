@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import {fetchDetails} from "../../store/thunks/showThunk.ts";
-import {AppDispatch, RootState} from "../../app/store.ts";
+import {RootState} from "../../app/store.ts";
 import Spinner from "../Spinner/Spinner.tsx";
+import {useAppDispatch, useAppSelector} from "../../app/hooks.ts";
 
 const ShowItem: React.FC = () => {
     const { showId } = useParams();
-    const dispatch = useDispatch<AppDispatch>();
-    const { Details, isLoading } = useSelector((state: RootState) => state.show);
+    const dispatch = useAppDispatch();
+    const { Details, isLoading } = useAppSelector((state: RootState) => state.show);
 
     useEffect(() => {
         if (showId) {
