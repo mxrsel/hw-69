@@ -1,0 +1,12 @@
+.linkItem {
+    border: 1px solid black;
+}
+
+.listItem {
+display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+    padding: 5px;
+    margin-bottom: 10px;
+    color: black;
+}

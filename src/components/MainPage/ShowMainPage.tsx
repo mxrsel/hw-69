@@ -25,17 +25,19 @@ const ShowMainPage: React.FC = () => {
 
     return (
         <div>
+            <h1 className='text-center'>Movie Search</h1>
             <input
                 type="text"
                 value={showsList}
                 onChange={handleInputChange}
                 placeholder="Search for TV shows"
+                className='text-center form-control mb-4'
             />
 
-            {isLoading && <Spinner />}
+            {isLoading && <Spinner/>}
             <ul>
                 {show.map((show) => (
-                    <ShowDetails key={show.id} show={show} />
+                    <ShowDetails key={show.id} show={show}/>
                 ))}
             </ul>
         </div>
